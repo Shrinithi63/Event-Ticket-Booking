@@ -44,6 +44,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private List<Event> staffingEvents = new ArrayList<>();
 
+    @OneToMany(mappedBy = "purchaser", cascade = CascadeType.ALL)
+    private List<Ticket> purchasedTickets = new ArrayList<>();
+
     @CreatedDate
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
