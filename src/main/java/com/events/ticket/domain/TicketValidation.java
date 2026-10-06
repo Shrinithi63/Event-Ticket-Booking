@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +22,18 @@ public class TicketValidation {
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketValidation that = (TicketValidation) o;
+        return Objects.equals(id, that.id) && status == that.status && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, createdAt, updatedAt);
+    }
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
